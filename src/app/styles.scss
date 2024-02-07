@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    p {
+      margin: 0 10px;
+
+    }
+}
+
+
+
+.field {
+    margin: 10px;
+}
+
+.spinner {
+  margin: 0 10px
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.modal {
+  position: absolute;
+  border: 2px solid red;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+// .option-container {
+//   border: 1px solid red;
+//   .option {
+//   display: flex;
+//   align-items: center;
+//   input {
+//     margin: 0 10px;
+//   }
+//   }
+// }
