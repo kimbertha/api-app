@@ -1,3 +1,4 @@
+/* eslint-disable no-async-promise-executor */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -18,7 +19,7 @@ const App = () => {
 
   const [options, setOptions] = useState <Array<Options> | false>(fakebody)
   
-  const [list, setList] = useState<Array<Options>>([])
+  const [list, setList] = useState<Array<Options>>(fakebody)
   const [progress, setProgress] = useState <Array<List>>([])
   const [complete, setComplete] = useState<Array<any>>([])
   const [error, setError] = useState <Array<any>>([])
@@ -56,29 +57,46 @@ const App = () => {
   }, [error])
 
 
-  const sendRequest = (option: Options) => {
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        console.log('request sent')
-        apiRun(option)
 
-        resolve()
-      }, 1000)
-    })
+  const batchOptions = async () => {
+    const listArr = [...list]
+    const arrays:any = [], size = 3
+    
+    while (listArr.length > 0)
+      arrays.push(listArr.splice(0, size))
+
+    for (const batch of arrays) {
+      console.log(arrays)
+      // setTimeout(async () =>{
+      await Promise.all(batch.map(async (option:Options) =>  apiRun(option)))
+      // .then(() => console.log('COMPLETE BATCH'))
+      // }, 1000)
+    }
+
+    // await arrays.forEach(async (batch:Options[], i: number) =>{
+    //   console.log('STARTING BATCH')
+    //   setTimeout(async () =>{
+    //     Promise.all(
+    //       batch.map(async (option:Options) => apiRun(option))
+    //     )
+    //       .then(() => console.log('COMPLETE BATCH'))
+    //   }, i * 6000)
+    // })
   }
-
+  
+  
   /// PROCESS
   const apiRun = async (option:Options) => {
-    list.forEach(async (obj:Options) => 
-      await axios.post(run, obj.body, headers)
-        .then(({ data }) => {
-          if (data.status === 'Recieved') {
-            setProgress((progress)=> [...progress, { ...obj, result: data }])
-            recursiveCheck({ ...obj, startId: data.id })
-          }
-        })
-    )
+
+    return new Promise(async () => {
+      const { data } =  await axios.post(run, option.body, headers)
+      if (data.status === 'Recieved') {
+        setProgress((progress)=> [...progress, { ...option, result: data }])
+        recursiveCheck({ ...option, startId: data.id })
+      }
+    })
   }
+  
 
   const recursiveCheck = ( obj: any) => { 
     const timeout = setTimeout(async () => {
@@ -114,7 +132,7 @@ const App = () => {
       <button onClick={(e) =>{
         e.currentTarget.disabled = true
         setOptions(false)
-        apiRun()
+        batchOptions()
       }}>Run</button>
 
       <div> LIMIT: {limit} </div>
