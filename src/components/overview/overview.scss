@@ -1,0 +1,69 @@
+
+.overview-cont{
+width: 20%;
+position:fixed;
+
+
+.overview-unit {
+  height: 80px;
+  flex-grow: 1;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+  border: 1px solid rgb(202, 202, 202);
+  background-color: white;
+
+  .open-table {
+    position: absolute;
+    right: 0;
+    margin-right: 25px;
+  }
+
+
+.overview-header{
+  width: 100%;
+  .overview-icon{
+    border-radius: 10px;
+    padding: 6px;
+    font-size: 0.8em;
+    color: white;
+    background-color: rgb(155, 155, 155);
+  }
+  .title{
+    color:rgb(183, 181, 181);
+    font-size: 0.8em;
+    margin-left: 10px;
+  }
+}
+
+
+
+  .overview-content{
+  padding: 5px 10px;
+
+  .number{
+    margin:10px 0;
+    span{
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-right: 5px;
+    }
+}
+}
+}
+
+
+.progress-bar{
+  // height: 10px;
+  opacity: 0.5;
+}
+}
+
+.no-data{
+  margin: 20px;
+  * {
+    margin: 0 px;
+    color: grey;
+  }
+}

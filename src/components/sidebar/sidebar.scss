@@ -1,0 +1,23 @@
+
+.sidebar {
+  background-color: #15191B;
+  background-color: white;
+  position: fixed;
+  height: calc(100vh - 60px) ;
+  border-right: 1px solid rgb(235, 234, 234);
+  margin-top:60px;
+  width: 87px;
+
+
+
+.sidebar-options {
+  height: 100%;
+}
+
+
+  .sidebar-icon{
+  color: rgb(83, 83, 83);
+  font-size: 20px;
+  margin: 20px 0;
+  }
+}

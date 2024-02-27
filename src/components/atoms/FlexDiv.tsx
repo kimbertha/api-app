@@ -2,11 +2,31 @@
 import React from 'react'
 import  styled from 'styled-components'
 
+interface FlexDivProps {
+  children: React.ReactNode;
+  className?: string;
+  m?:number;
+  ml?:number;
+  mr?:number;
+  mt?:number;
+  mb?:number;
+  pl?:number;
+  pr?:number;
+  pt?:number;
+  pb?:number;
+  dir?: 'row' |'column';
+  align?:  'center'  | 'fe'  |'fs'; 
+  justify? :  'center'  | 'fe'  |'sb'; 
+  center?: boolean;
+  fw?:boolean;
+  fh?:boolean;
+
+}
+
 const centerClass = ` 
 justify-content: center;
 alight-items:center;
 flex-direction: column;
-background: pink;'
 `
 const flexEnd = 'flex-end;'
 const flexStart  = 'flex-start;'
@@ -15,7 +35,7 @@ const fullHeight = 'height: 100%;'
 
 const Container =  styled.div`
 display: flex;
-border: 2px solid red;
+
 
 ${({ center }) => center && centerClass}
 
@@ -46,11 +66,12 @@ ${({ align }) => align && `align-items: ${
 
 ${({ justify }) => justify && `justify-content:${
     justify === 'center' ? 'center;' 
-      : justify === 'fe' ? flexEnd
-        : flexStart}` }
+      : justify === 'fe' ?  flexEnd
+        : justify === 'sb' ? 'space-between' 
+          : flexStart}` }
       
 `
-const FlexDiv = ({  children, ...otherProps }) => {
+const FlexDiv = ({  children, ...otherProps }:FlexDivProps) => {
   return (
     <Container {...otherProps} >
       {children}

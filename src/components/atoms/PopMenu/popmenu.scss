@@ -1,0 +1,25 @@
+
+.screen {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  top:0;
+  z-index: 100;
+
+}
+
+.menu-container {
+  position: absolute;
+  z-index: 100;
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+  box-shadow: 10px 10px 20px -7px rgb(59, 59, 59);
+
+  .menu-option {
+    padding: 2px 10px;
+    font-size: 0.8em;
+    cursor: pointer;
+  }
+}

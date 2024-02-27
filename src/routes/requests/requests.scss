@@ -1,0 +1,54 @@
+.requests-container {
+
+
+.overview-container {
+position: relative;
+width: 22%;
+}
+.sections-container {
+  flex-grow: 1;
+}
+}
+
+.section-container {
+  background-color: white;
+  padding: 20px;
+  margin:  7px 0;
+  border-radius: 5px;
+  border: 2px solid lightgrey;
+
+  .section-header {
+    margin-bottom: 20px ;
+    h1 {
+      font-size: 15px;
+    }
+    p {
+      color: grey;
+      font-size: 13px;
+    }
+
+    .icon {
+      font-size: 20px;
+      margin-right: 10px;
+      color:white;
+      background-color: rgb(204, 204, 204);
+      padding: 5px;
+      border-radius: 5px;
+    }
+    .more {
+    font-size: 22px;
+    }
+  }
+
+}
+
+.unit {
+  display: flex;
+  padding-bottom: 2px;
+  margin-bottom: 2px;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
+}
+
+
+
