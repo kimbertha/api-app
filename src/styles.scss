@@ -2,6 +2,7 @@
 $sidebarWidth: 87px;
 $headerHeight:60px;
 $mainPadding: 20px;
+$greyBorder: 2px solid lightgrey;
 
 * {
   margin:0;
@@ -21,6 +22,12 @@ $mainPadding: 20px;
     margin: 0 5px
   }
 
+  
+.sd-buttom {
+
+  background-color: white !important;
+
+}
 
 }
 body {
@@ -65,4 +72,8 @@ body {
   div {
     flex-grow: 1
   };
+}
+
+.pointer {
+  cursor: pointer;
 }

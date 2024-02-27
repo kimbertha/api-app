@@ -10,6 +10,7 @@ interface FlexDivProps {
   mr?:number;
   mt?:number;
   mb?:number;
+  p?:number;
   pl?:number;
   pr?:number;
   pt?:number;
@@ -33,7 +34,7 @@ const flexStart  = 'flex-start;'
 const fullWidth = 'width: 100%;'
 const fullHeight = 'height: 100%;'
 
-const Container =  styled.div`
+const Container =  styled.div<FlexDivProps>`
 display: flex;
 
 

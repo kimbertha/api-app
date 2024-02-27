@@ -19,8 +19,8 @@ const Table = ({ columns,rows }: TableProps) => {
       </thead>
       <tbody>
         {columns.length > 0 ?
-          columns.map((column: any) =>
-            <tr key={column.id}>
+          columns.map((column: any, i: number) =>
+            <tr key={i}>
               {rows.map((row:any) => 
                 <td key={row.header}>{ row.component ? row.component(column) : column[row.id]}</td>
               )}

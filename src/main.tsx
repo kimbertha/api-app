@@ -1,16 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './app'
-import { Route, Routes, BrowserRouter } from 'react-router-dom'
+import {  BrowserRouter } from 'react-router-dom'
+
+import Sidebar from './components/sidebar/Sidebar'
+import Header from './components/header/Header'
+import App from './App'
 
 import './styles.scss'
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  // <React.StrictMode>
   <BrowserRouter>
-    <App />
+    <Header/>
+    <Sidebar/>
+    <div className='main'>
+      <App/>
+    </div>
   </BrowserRouter>
-  // </React.StrictMode>
 )
 

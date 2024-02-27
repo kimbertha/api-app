@@ -19,6 +19,9 @@ module.exports = {
 },
   plugins: ['react-refresh'],
   rules: {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "brace-style": "error",

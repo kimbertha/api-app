@@ -15,17 +15,17 @@ import { HiArrowsExpand } from 'react-icons/hi'
 
 
 interface OverviewProps {
-  list:Options[];
+  waiting:Options[];
   progress: List[];
   complete:any[];
   limit: number;
 }
 
-const ProgressOverview = ({ list, progress, complete }: OverviewProps ) => {
+const ProgressOverview = ({ waiting, progress, complete }: OverviewProps ) => {
 
   const sections = [{
     title: 'Waiting',
-    values: list,
+    values: waiting,
     icon: <AiOutlineLoading3Quarters className='overview-icon' 
       style={{  backgroundColor: 'blue' }}
     /> ,
@@ -55,47 +55,49 @@ const ProgressOverview = ({ list, progress, complete }: OverviewProps ) => {
   }]
 
 
-  const totalQueries = list.length + progress.length + complete.length
+  const totalQueries = waiting.length + progress.length + complete.length
 
   
   return (
-    <FlexDiv className='overview-cont' dir='column'>
+    <div className='overview-container'>
+      <FlexDiv className='overview-cont' dir='column'>
 
-      {sections.map(section => {
-        const percent = section.values.length / totalQueries * 100
-        return (
-          <FlexDiv key={section.title} className='overview-unit'  dir='column'>
-            <HiArrowsExpand className='open-table' />
+        {sections.map(section => {
+          const percent = section.values.length / totalQueries * 100
+          return (
+            <FlexDiv key={section.title} className='overview-unit'  dir='column'>
+              <HiArrowsExpand className='open-table' />
 
-            <FlexDiv align='center' className='overview-header'>
-              {section.icon}
-              <p className='title'>{section.title}</p> 
-            </FlexDiv>
+              <FlexDiv align='center' className='overview-header'>
+                {section.icon}
+                <p className='title'>{section.title}</p> 
+              </FlexDiv>
 
 
-            <div className='overview-content'>
+              <div className='overview-content'>
 
-              <div className='number'>
-                <span>{section.values.length}</span><small>/ {totalQueries} Queires </small>  
-              </div>
+                <div className='number'>
+                  <span>{section.values.length}</span><small>/ {totalQueries} Queires </small>  
+                </div>
           
-              <ProgressBar
-                completed={Math.floor(percent)} 
-                bgColor={section.color} 
-                className='progress-bar'
-                labelSize='10px' 
-                height='12px'/>
-            </div>
+                <ProgressBar
+                  completed={Math.floor(percent)} 
+                  bgColor={section.color} 
+                  className='progress-bar'
+                  labelSize='10px' 
+                  height='12px'/>
+              </div>
 
-          </FlexDiv>
-        )
-      })}
+            </FlexDiv>
+          )
+        })}
 
         
   
     
     
-    </FlexDiv>
+      </FlexDiv>
+    </div>
   )
 }
 

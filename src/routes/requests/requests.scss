@@ -1,3 +1,5 @@
+@import '../../styles.scss';
+
 .requests-container {
 
 
@@ -52,3 +54,9 @@ width: 22%;
 
 
 
+.limit-container {
+  background-color: white;
+  border: $greyBorder;
+  border-radius: 5px;
+  padding: 10px;
+}

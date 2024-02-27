@@ -1,66 +1,78 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import FlexDiv from '../../components/atoms/FlexDiv'
 import ProgressOverview from '../../components/overview/ProgressOverview'
-import Section from './Section'
+import { Options, List } from '../../types/appTypes'
+import { setFilter } from './fetchProcess'
+import { apiRun } from './fetchProcess'
 import './requests.scss'
-import { FaCheckCircle } from 'react-icons/fa'
-import { MdOutlineIncompleteCircle } from 'react-icons/md'
-import { AiOutlineLoading3Quarters } from 'react-icons/ai'
+import RequestSections from './RequestSections'
+
+interface RequestsProps {
+  waiting: List[];
+  setWaiting:React.Dispatch<React.SetStateAction<Options[]>>
+  limit: any;
+  setLimit: any;
+}
+
+const Requests = ({ waiting, setWaiting,  limit, setLimit }:RequestsProps) => {
+  const [start, setStart] = useState(false)
+  const [queue, setQueue] = useState<any>([])
+  const [progress, setProgress] = useState <any>([])
+  const [complete, setComplete] = useState<any>([])
+
+  const moveQueue = () => {
+    setTimeout(() => setQueue([...waiting.slice(0,limit)]),1000)
+    setStart(true)
+  }
+
+  useEffect(() =>{
+    setFilter(setWaiting,progress)
+  }, [queue])
+
+  useEffect(()=> {
+    setFilter(setWaiting,progress)
+  }, [progress])
 
 
+  useEffect(() => {
+    setFilter(setProgress,complete)
+    setFilter(setQueue,complete)
+  }, [complete])
 
-const Requests = ({ list, progress, complete, limit, batchOptions }:any) => {
 
-  const sections = [
-    { section: list, 
-      title: 'Waiting',
-      sub: 'Requests in queue',
-      icon: <AiOutlineLoading3Quarters className='icon' />
-    },
-    { section: progress, 
-      title: 'Progress' ,
-      sub: 'Requests receiving data,',
-      icon: <MdOutlineIncompleteCircle className='icon'/>
-
-    },
-    { section: complete, 
-      title: 'Complete',
-      sub: 'Data request complete and ready to view',
-      icon: <FaCheckCircle  className='icon' />
+  // monitor fetch
+  useEffect(() =>{
+    if (queue.length <= 0 && waiting.length > 0 && start) {
+      if (waiting.length < limit) {
+        setLimit(waiting.length)
+        moveQueue()
+      } else {
+        moveQueue()
+      }
     }
-  ]
 
-
+    if (queue.length === limit) queue.map((option:Options) => apiRun(option, setProgress, setComplete))
+    
+  },[queue])
 
   return (
     <FlexDiv className='requests-container'>
-      <div className='sections-container'>
 
-        <FlexDiv align='center' justify='sb'>
-          <h1>Requests</h1>
+      <RequestSections 
+        waiting={waiting}
+        progress={progress}
+        complete={complete}
+        moveQueue={moveQueue}
+        setStart={setStart}/>
 
-          <div>
-            <button className='button' onClick={batchOptions}>Start</button>
-            <button className='button'>Cancel all</button>
-          </div>
-        </FlexDiv>
-        
-        <p> Limit : {limit}</p>
-
-        {sections.map(section=> 
-          <Section data={section}/>
-        )}
-      </div>
-
-      <div className='overview-container'>
-        <ProgressOverview
-          list={list}
-          progress={progress}
-          complete={complete}
-          limit={limit}
-        />
-      </div>
+      <ProgressOverview
+        waiting={waiting}
+        progress={progress}
+        complete={complete}
+        limit={limit}
+      />
 
     </FlexDiv>
   )
